@@ -1,0 +1,9 @@
+[2022-06-07T14:51:08.231] [INFO] auth - Getting data from redis /v1/api/auth/user
+[2022-06-07T14:51:08.517] [INFO] auth - Getting data from Database /v1/api/auth/user
+[2022-06-07T14:51:37.023] [INFO] auth - Getting data from redis /v1/api/auth/user
+[2022-06-07T14:51:37.368] [INFO] auth - Getting data from Database /v1/api/auth/user
+[2022-06-07T14:51:55.243] [INFO] auth - Getting data from redis /v1/api/auth/user
+[2022-06-07T14:51:55.519] [INFO] auth - Getting data from Database /v1/api/auth/user
+[2022-06-07T14:51:58.282] [INFO] auth - Getting data from redis /v1/api/auth/user
+[2022-06-07T14:51:59.420] [INFO] auth - Getting data from redis /v1/api/auth/user
+[2022-06-07T14:52:00.320] [INFO] auth - Getting data from redis /v1/api/auth/user
