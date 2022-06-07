@@ -14,7 +14,7 @@ module.exports.getOrSetCache = (key, cb) => {
                 resolve(JSON.parse(data));
             } else {
                 const freshData = await cb();
-                await redisClient.setEx(key, Number(process.env.DEFAULT_EXPIRATION), JSON.stringify(freshData));
+                await redisClient.setEx(key, 36000, JSON.stringify(freshData));
                 await redisClient.disconnect();
                 resolve(freshData);
             }

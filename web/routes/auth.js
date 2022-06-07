@@ -7,18 +7,30 @@ const logger = log4js.getLogger("auth");
 router.get('/user', async (req, res) => {
     let connection;
     let results;
+    // Pagination
+    let page = 0;
+    if (req.query.hasOwnProperty("page")) {
+        page = Number(req.query.page);
+    }
+    const limit = Number(5);
+    const offset = Number(page) * Number(limit);
+    // End Pagination
     logger.info('Getting data from redis /v1/api/auth/user');
-    const data = await redis.getOrSetCache(`ms-user`, async () => {
+    const data = await redis.getOrSetCache(`ms-user?page=${page}`, async () => {
         try {
             logger.info('Getting data from Database /v1/api/auth/user');
+
             connection = await oracledb.getConnection({
                 username: process.env.DB_ORACLE_USERNAME,
                 password: process.env.DB_ORACLE_PASSWORD,
                 connectionString: process.env.DB_ORACLE_CONN_STRING
-            })
+            });
             const { rows } = await connection.execute(
-                `SELECT * FROM MS_USER_DEV`
-                , {}
+                `
+                    SELECT * FROM MS_USER_DEV 
+                    ORDER BY ID OFFSET :offset ROWS FETCH NEXT :limit ROWS ONLY
+                `
+                , [offset, limit]
                 , { outFormat: oracledb.OUT_FORMAT_OBJECT }
             );
             console.log(rows);
